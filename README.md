@@ -1,3 +1,4 @@
 # ATEDA
-# Descripción de proyecto: Sistema de alerta temprana para identifiación de estudiantes con posibles dificultades del aprendizaje
-# Tecnologías a usar:
+El presente documento contempla la descripción del desarrollo del proyecto ATEDA: Sistema de alerta temprana para la identificación de estudiantes con posiboes dificultades del aprendizaje
+
+Tecnologías a usar:
