@@ -45,7 +45,7 @@ Por lo que se deben construir paquetes de datos y casos ficticios para entrenar 
 
 Con estas herramientas fué posible delimitar los parámetros de las fuentes de información correctas, que tipo de data necesito para crear los indicadores que provocan las alertas. 
 
-#📚 Metodología de Trabajo
+# 📚 Metodología de Trabajo
 Usaré una metodología ágil iterativa incremental. El proyecto se divide mediante una EDT en pequeños entregables y paquetes de trabjo. Cada paquete corresponde a nuevas funcionalidades revisadas y provadas. Se construye, se revisa, se prueba y se implementa, el proceso se repite.
 
 
