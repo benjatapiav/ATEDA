@@ -10,9 +10,9 @@
 
 Este manual tiene como propósito describir el desarrollo e implementación del proyecto **ATEDA**.
 
-Se presenta la idea central que impulsa su construcción, los objetivos del proyecto, su estructura, las fuentes de información utilizadas, el funcionamiento del sistema de alertas y las tecnologías involucradas en su desarrollo.
+Se presenta la idea central que impulsa su construcción, los objetivos del proyecto, su estructura, las fuentes de información utilizadas, el funcionamiento del sistema de alertas y las tecnologías involucradas.
 
-El documento será actualizado progresivamente a medida que avance el proyecto.
+El documento será actualizado progresivamente a medida que avance el programa.
 
 ---
 
@@ -21,18 +21,18 @@ El documento será actualizado progresivamente a medida que avance el proyecto.
 Este manual busca brindar una guía estructurada que permita al lector:
 
 1. Comprender los fundamentos y el propósito de ATEDA.
-2. Conocer la estructura y el desarrollo del proyecto.
-3. Comprender cómo se estructuran y utilizan los datos.
+2. Conocer la estructura y la elavoración del proyecto.
+3. Comprender cómo se crean, se arman y se utilizan los datos.
 4. Familiarizarse con conceptos propios del área de la psicopedagogía y la educación.
 5. Comprender el funcionamiento del sistema de alertas.
-6. Conocer las tecnologías utilizadas para la construcción del sistema.
-7. Documentar las decisiones tomadas durante el desarrollo del proyecto.
+6. Conocer las tecnologías utilizadas.
+7. Documentar las decisiones tomadas.
 
 ---
 
 ## 👤 Integrante
 
-Por decisión propia no cuento con un equipo de desarrollo, por lo que el proyecto será diseñado, desarrollado, probado y documentado de manera individual.
+Por decisión propia no cuento con un equipo, por lo que el proyecto será diseñado, desarrollado, probado y documentado de manera individual.
 
 - **Benjamín Tapia**
 
@@ -40,7 +40,7 @@ Por decisión propia no cuento con un equipo de desarrollo, por lo que el proyec
 
 ## 🧠 Origen e idea central
 
-ATEDA nace a partir de una experiencia personal y de la cercanía con el área de la psicopedagogía.
+ATEDA nace a partir de una experiencia personal.
 
 Mi hijo fue diagnosticado con TDAH y mi esposa es psicopedagoga. Ambas situaciones despertaron mi interés por comprender de mejor manera las dificultades que pueden enfrentar los estudiantes durante su proceso educativo y cómo la tecnología puede contribuir a su identificación temprana.
 
