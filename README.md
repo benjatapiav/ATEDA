@@ -17,7 +17,7 @@
 Por desición propia no cuento con un equipo, por lo que todo será diseñado, desarrollado, testeado y aplicado por mí:
 - Benjamin Tapia
 
-# 🧠 Idea Central
+# 🧠 Origen e Idea Central
 Mi hijo fué diagnosticado con TDAH. Mi esposa es psicopedagoga. Estos hechos en paralelo me hicieron decidir unificar la informática con la psicopedagogía. Tube el proyecto de título presente durante los 8 semestres y a medida que adquiria conocimientos en lenguajes de programación, modelos de procesado de texto, modelamiento de bases de datos y más, pude tener una visión mas clara de lo que puedo construir y de lo que personalmente quería construir. 
 
 La idea es desarrollar una página web interna que pueda procesar antecedentes escolares, procesarlos y entregar una alerta que oriente hacia una intervención profesional. 
@@ -29,7 +29,7 @@ La idea es desarrollar una página web interna que pueda procesar antecedentes e
 
 Si existen variaciones negativas en los indicadores del estudiante, estos son analizados y procesados para posteriormente entregar uno de estos cuatro niveles de alerta. 
 
-El proyecto es pensado para ayudar a psicopedagogas o psicopedagogos a identificar de manera temprana a estudiantes que posiblemente presenten dificultades del aprendizaje. Con el fin de abordar el caso antes de que las dificultades se conviertan en un obstáculo inmutable.
+ATEDA está pensada para ayudar a psicopedagogas o psicopedagogos a identificar de manera temprana a estudiantes que posiblemente presenten dificultades del aprendizaje. Con el fin de abordar el caso antes de que las dificultades se conviertan en un obstáculo inmutable.
 
 # 🧩 Alcance y Construcción de la Data
 El proyecto se situa en establecimientos educacionales pero se prueba y se aplica con información escolar ficticia, dadas las dificultades que tiene el trabajar con información sensible de estudiantes y los permisos institucionales que se requieren para esta actividad. 
