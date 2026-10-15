@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Iniciar sesión | ATEDA</title>
+</head>
+<body>
+    <main class="container-vistaLogin">
+        <div class="container-imagenLogin">
+            <img src="" alt="">
+        </div>
+        <div class="container-formLogin">
+            <form action="/login" method="POST" class="form-login" id="form-login">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" required>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required >
+
+                <button type="submit" id="buttonLogin">Iniciar Sesión</button>
+            </form>
+        </div>
+
+    </main>
+    <script src="../js/login.js"></script>
+</body>
+</html>

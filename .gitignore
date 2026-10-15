@@ -1,0 +1,17 @@
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+# Dependencias Node.js
+node_modules/
+
+# Archivos de registro
+*.log
+
+# Archivos temporales de Word
+~$*
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
