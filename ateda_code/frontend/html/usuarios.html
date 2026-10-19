@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestión de usuarios | ATEDA</title>
+
+    <link rel="stylesheet" href="../css/usuarios.css">
+    <script src="../js/usuarios.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>ATEDA</h1>
+        <p>Administración de usuarios</p>
+
+        <nav>
+            <a href="./inicio.html">Volver al inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Usuarios registrados</h2>
+
+            <p id="mensajeLista" role="status">
+                Cargando usuarios...
+            </p>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaUsuarios">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2 id="tituloFormulario">Registrar usuario</h2>
+
+            <form id="formUsuario">
+
+                <input
+                    type="hidden"
+                    id="idUsuario"
+                >
+
+                <div>
+                    <label for="nombres">Nombres</label>
+                    <input
+                        type="text"
+                        id="nombres"
+                        name="nombres"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="apellidos">Apellidos</label>
+                    <input
+                        type="text"
+                        id="apellidos"
+                        name="apellidos"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="correo">Correo electrónico</label>
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label for="idRol">Rol</label>
+                    <select
+                        id="idRol"
+                        name="id_rol"
+                        required
+                    >
+                        <option value="">
+                            Seleccionar rol
+                        </option>
+                    </select>
+                </div>
+
+                <div id="grupoPassword">
+                    <label for="password">Contraseña</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <small>
+                        Mínimo 8 caracteres.
+                    </small>
+                </div>
+
+                <div class="acciones-formulario">
+                    <button type="submit" id="btnGuardar">
+                        Registrar usuario
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btnCancelar"
+                        hidden
+                    >
+                        Cancelar edición
+                    </button>
+                </div>
+            </form>
+
+            <p id="mensajeFormulario" role="status"></p>
+        </section>
+    </main>
+
+</body>
+</html>

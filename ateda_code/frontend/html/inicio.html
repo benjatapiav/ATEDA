@@ -4,14 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Inicio | ATEDA</title>
+
+    <link rel="stylesheet" href="../css/inicio.css">
+    <script src="../js/inicio.js" defer></script>
 </head>
 <body>
 
-    <h1>Bienvenido a ATEDA</h1>
+    <header>
+        <h1>ATEDA</h1>
+        <p>Sistema de alerta temprana</p>
+    </header>
 
-    <p id="mensajeUsuario">Verificando sesión...</p>
+    <main>
+        <section>
+            <h2>Bienvenido a ATEDA</h2>
 
-    <script src="../js/inicio.js"></script>
+            <p id="mensajeUsuario">
+                Verificando sesión...
+            </p>
+
+            <p id="mensajeError" role="alert"></p>
+        </section>
+
+        <section>
+            <h2>Opciones del sistema</h2>
+
+            <nav>
+                <a href="./usuarios.html">
+                    Gestión de usuarios
+                </a>
+            </nav>
+
+            <p class="descripcion">
+                Administración de las cuentas de usuario
+                y sus permisos de acceso.
+            </p>
+        </section>
+
+        <section>
+            <h2>Sesión</h2>
+
+            <button
+                id="btnCerrarSesion"
+                type="button"
+                disabled
+            >
+                Cerrar sesión
+            </button>
+        </section>
+    </main>
+
 </body>
 </html>

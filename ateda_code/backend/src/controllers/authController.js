@@ -1,24 +1,25 @@
+
 const { validarCredenciales } = require('../services/authService');
 
-const login = async (req,res) =>{
-
-    try{
-        const { correo, password } = req.body || {}
+// HU-001: Iniciar sesión
+const login = async (req, res) => {
+    try {
+        const { correo, password } = req.body || {};
 
         const resultado = await validarCredenciales(correo, password);
 
-        if(!resultado.valido){
+        if (!resultado.valido) {
             return res.status(resultado.codigo).json({
                 mensaje: resultado.mensaje
             });
         }
 
         // Regenerar la sesión al autenticarse
-        req.session.regenerate((error) =>{
-            if(error){
-                console.error('Error al crear sesión:',error.message);
+        req.session.regenerate((error) => {
+            if (error) {
+                console.error('Error al crear sesión:', error.message);
                 return res.status(500).json({
-                    mensaje: 'No fue posible iniciar sesion'
+                    mensaje: 'No fue posible iniciar sesión'
                 });
             }
 
@@ -29,9 +30,9 @@ const login = async (req,res) =>{
                 rol: resultado.usuario.rol
             };
 
-            req.session.save((error) =>{
-                if(error){
-                    console.error('Error al guardar sessón:',error.message);
+            req.session.save((error) => {
+                if (error) {
+                    console.error('Error al guardar sesión:', error.message);
                     return res.status(500).json({
                         mensaje: 'No fue posible guardar la sesión'
                     });
@@ -43,7 +44,7 @@ const login = async (req,res) =>{
                 });
             });
         });
-    }catch(error){
+    } catch (error) {
         console.error('Error en inicio de sesión:', error.message);
 
         return res.status(500).json({
@@ -53,10 +54,39 @@ const login = async (req,res) =>{
 };
 
 // Consultar la sesión activa
-const obtenerSesion = (req,res) =>{
+const obtenerSesion = (req, res) => {
     return res.status(200).json({
         usuario: req.session.usuario
     });
 };
 
-module.exports = { login, obtenerSesion };
+// HU-003: Cerrar sesión
+const cerrarSesion = (req, res) => {
+    req.session.destroy((error) => {
+        if (error) {
+            console.error('Error al cerrar sesión:', error.message);
+
+            return res.status(500).json({
+                mensaje: 'No fue posible cerrar la sesión'
+            });
+        }
+
+        // Eliminar la cookie de sesión del navegador
+        res.clearCookie('connect.sid', {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax',
+            path: '/'
+        });
+
+        return res.status(200).json({
+            mensaje: 'Sesión cerrada correctamente'
+        });
+    });
+};
+
+module.exports = {
+    login,
+    obtenerSesion,
+    cerrarSesion
+};

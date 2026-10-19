@@ -1,28 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/login.css">
+
     <title>Iniciar sesión | ATEDA</title>
+
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/login.js" defer></script>
 </head>
 <body>
-    <main class="container-vistaLogin">
-        <div class="container-imagenLogin">
-            <img src="" alt="">
-        </div>
-        <div class="container-formLogin">
-            <form action="/login" method="POST" class="form-login" id="form-login">
-                <label for="correo">Correo electrónico</label>
-                <input type="email" id="correo" name="correo" required>
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required >
 
-                <button type="submit" id="buttonLogin">Iniciar Sesión</button>
+    <header>
+        <h1>ATEDA</h1>
+        <p>Sistema de alerta temprana</p>
+    </header>
+
+    <main>
+        <section class="panel-login">
+            <h2>Iniciar sesión</h2>
+
+            <form id="form-login" method="POST">
+
+                <div class="campo">
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" id="buttonLogin">
+                    Iniciar sesión
+                </button>
+
             </form>
-        </div>
-
+        </section>
     </main>
-    <script src="../js/login.js"></script>
+
 </body>
 </html>
