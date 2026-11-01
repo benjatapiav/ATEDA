@@ -5,6 +5,7 @@ const pgSession = require('connect-pg-simple')(session);
 
 const authRoutes = require('./routes/authRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const alertaRoutes = require('./routes/alertaRoutes');
 
 const pool = require('./config/database');
 
@@ -46,6 +47,8 @@ app.get('/', (req,res) => {
 app.use('/api/auth', authRoutes);
 // Gestión de usuarios - HU-002
 app.use('/api/usuarios', usuarioRoutes);
+// Gestión de alertas y seguimiento
+app.use('/api/alertas', alertaRoutes);
 
 const iniciarServidor = async () =>{
 

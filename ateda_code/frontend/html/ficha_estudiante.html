@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ATEDA - Ficha del estudiante</title>
+
+    <link rel="stylesheet" href="../css/ficha_estudiante.css">
+
+    <script src="../js/ficha_estudiante.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>ATEDA - Ficha del estudiante</h1>
+        <p>Información individual y seguimiento de alertas</p>
+    </header>
+
+    <main>
+
+        <nav>
+            <a href="./estudiantes.html">Volver a estudiantes</a>
+        </nav>
+
+        <!-- ==========================================
+             INFORMACIÓN DEL ESTUDIANTE
+             ========================================== -->
+
+        <section>
+
+            <h2>Información del estudiante</h2>
+
+            <p id="mensajeFicha">Cargando información...</p>
+
+            <div id="datosEstudiante">
+
+                <div>
+                    <strong>Identificador:</strong>
+                    <span id="estudianteId"></span>
+                </div>
+
+                <div>
+                    <strong>Nombre completo:</strong>
+                    <span id="nombreEstudiante"></span>
+                </div>
+
+                <div>
+                    <strong>Fecha de nacimiento:</strong>
+                    <span id="fechaNacimiento"></span>
+                </div>
+
+                <div>
+                    <strong>Curso:</strong>
+                    <span id="cursoEstudiante"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ==========================================
+             ALERTA ACTIVA
+             ========================================== -->
+
+        <section>
+
+            <h2>Alerta activa</h2>
+
+            <div>
+                <strong>Nivel:</strong>
+                <span id="nivelAlerta"></span>
+            </div>
+
+            <div>
+                <strong>Estado:</strong>
+                <span id="estadoAlerta"></span>
+            </div>
+
+            <div>
+                <strong>Motivo:</strong>
+                <span id="motivoAlerta"></span>
+            </div>
+
+            <!-- ==========================================
+                 ACCIONES DE LA ALERTA
+                 ========================================== -->
+
+            <div id="accionesAlerta">
+
+                <button
+                    id="botonIniciarSeguimiento"
+                    type="button"
+                    hidden
+                >
+                    Iniciar seguimiento
+                </button>
+
+                <p id="mensajeAccionAlerta" role="status"></p>
+
+            </div>
+
+        </section>
+        
+        <!-- ==========================================
+             REGISTRAR INTERVENCIÓN
+             ========================================== -->
+            
+        <section id="seccionRegistrarIntervencion" hidden>
+        
+            <h2>Registrar intervención de seguimiento</h2>
+        
+            <form id="formularioIntervencion">
+            
+                <div class="campo-formulario">
+                
+                    <label for="accionIntervencion">
+                        Acción realizada:
+                    </label>
+                
+                    <textarea
+                        id="accionIntervencion"
+                        name="accion"
+                        rows="4"
+                        required
+                        placeholder="Describa la acción realizada con el estudiante"
+                    ></textarea>
+                
+                </div>
+            
+                <div class="campo-formulario">
+                
+                    <label for="resultadoIntervencion">
+                        Resultado de la intervención:
+                    </label>
+                
+                    <textarea
+                        id="resultadoIntervencion"
+                        name="resultado"
+                        rows="4"
+                        placeholder="Describa los resultados obtenidos"
+                    ></textarea>
+                
+                </div>
+            
+                <button
+                    id="botonRegistrarIntervencion"
+                    type="submit"
+                >
+                    Registrar intervención
+                </button>
+            
+                <p id="mensajeIntervencion" role="status"></p>
+            
+            </form>
+        
+        </section>
+
+        <!-- ==========================================
+             HISTORIAL DE SEGUIMIENTO
+             ========================================== -->
+
+        <section>
+
+            <h2>Historial de seguimiento</h2>
+
+            <div id="historialSeguimiento">
+                Cargando historial de seguimiento...
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

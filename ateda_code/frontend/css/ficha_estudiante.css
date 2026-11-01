@@ -1,0 +1,281 @@
+
+/* ==========================================
+   ESTILOS GENERALES
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #222;
+    background-color: #f5f5f5;
+}
+
+/* ==========================================
+   CABECERA
+   ========================================== */
+
+header {
+    background-color: #e9e9e9;
+    padding: 15px 30px;
+    border-bottom: 1px solid #ccc;
+}
+
+header h1 {
+    margin: 0 0 5px;
+    font-size: 22px;
+}
+
+header p {
+    margin: 0;
+}
+
+/* ==========================================
+   CONTENIDO PRINCIPAL
+   ========================================== */
+
+main {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 0 20px;
+}
+
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: #0645ad;
+    text-decoration: underline;
+}
+
+/* ==========================================
+   SECCIONES
+   ========================================== */
+
+section {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+section h2 {
+    font-size: 18px;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* ==========================================
+   DATOS DEL ESTUDIANTE
+   ========================================== */
+
+#datosEstudiante {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+#datosEstudiante div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#datosEstudiante strong {
+    color: #555;
+}
+
+#datosEstudiante span {
+    font-size: 15px;
+}
+
+/* ==========================================
+   ALERTA ACTIVA
+   ========================================== */
+
+section:nth-of-type(2) > div {
+    margin-bottom: 15px;
+}
+
+section:nth-of-type(2) strong {
+    display: inline-block;
+    min-width: 80px;
+    color: #555;
+}
+
+#nivelAlerta,
+#estadoAlerta {
+    font-weight: bold;
+}
+
+/* ==========================================
+   HISTORIAL DE SEGUIMIENTO
+   ========================================== */
+
+#historialSeguimiento {
+    padding: 15px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    color: #475569;
+}
+
+/* ==========================================
+   MENSAJES
+   ========================================== */
+
+#mensajeFicha {
+    color: #166534;
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   DISEÑO RESPONSIVO
+   ========================================== */
+
+@media (max-width: 600px) {
+
+    main {
+        padding: 0 10px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    #datosEstudiante {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================
+   TARJETAS DE SEGUIMIENTO
+   ========================================== */
+
+.tarjeta-seguimiento {
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    border-left: 4px solid #2563eb;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.tarjeta-seguimiento:last-child {
+    margin-bottom: 0;
+}
+
+.campo-seguimiento {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.campo-seguimiento:last-child {
+    margin-bottom: 0;
+}
+
+.campo-seguimiento strong {
+    color: #475569;
+}
+/* ==========================================
+   ACCIONES DE LA ALERTA
+   ========================================== */
+
+#accionesAlerta {
+    margin-top: 20px;
+}
+
+#botonIniciarSeguimiento {
+    padding: 10px 18px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#botonIniciarSeguimiento:hover {
+    background-color: #1d4ed8;
+}
+
+#botonIniciarSeguimiento[hidden] {
+    display: none;
+}
+
+#mensajeAccionAlerta {
+    margin-top: 12px;
+    color: #475569;
+}
+/* ==========================================
+   VISIBILIDAD DEL FORMULARIO
+   ========================================== */
+
+#seccionRegistrarIntervencion[hidden] {
+    display: none;
+}
+
+/* ==================================================
+   FORMULARIO DE INTERVENCIÓN
+   ================================================== */
+
+#formularioIntervencion {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-formulario label {
+    font-weight: bold;
+}
+
+.campo-formulario textarea {
+    width: 100%;
+    min-height: 110px;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+#botonRegistrarIntervencion {
+    align-self: flex-start;
+    padding: 12px 20px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#botonRegistrarIntervencion:hover {
+    background-color: #1d4ed8;
+}
+
+#botonRegistrarIntervencion:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#mensajeIntervencion {
+    margin: 0;
+}

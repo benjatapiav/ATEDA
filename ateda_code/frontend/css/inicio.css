@@ -105,6 +105,91 @@ button:disabled {
     color: #a00000;
 }
 
+
+/* ==========================================
+   PANEL DE ALERTAS ACTIVAS
+   ========================================== */
+
+.contenedor-alertas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.tarjeta-alerta {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.tarjeta-alerta h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+
+.tarjeta-alerta div {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Alerta azul */
+
+.alerta-azul {
+    border-top: 5px solid #2563eb;
+}
+
+.alerta-azul div {
+    color: #2563eb;
+}
+
+/* Alerta amarilla */
+
+.alerta-amarilla {
+    border-top: 5px solid #eab308;
+}
+
+.alerta-amarilla div {
+    color: #a16207;
+}
+
+/* Alerta naranja */
+
+.alerta-naranja {
+    border-top: 5px solid #f97316;
+}
+
+.alerta-naranja div {
+    color: #ea580c;
+}
+
+/* Alerta roja */
+
+.alerta-roja {
+    border-top: 5px solid #dc2626;
+}
+
+.alerta-roja div {
+    color: #dc2626;
+}
+
+/* Mensaje del resumen */
+
+#mensajeAlertas {
+    margin: 15px 0 0;
+    color: #555;
+    font-size: 12px;
+}
+
+/* Adaptación para pantallas pequeñas */
+
+@media (max-width: 600px) {
+    .contenedor-alertas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 /* Pantallas pequeñas */
 
 @media (max-width: 600px) {

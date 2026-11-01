@@ -5,7 +5,10 @@ const mensajeUsuario = document.getElementById('mensajeUsuario');
 const mensajeError = document.getElementById('mensajeError');
 const btnCerrarSesion = document.getElementById('btnCerrarSesion');
 
-// Verificar si existe una sesión activa
+// ==================================================
+// VERIFICAR SI EXISTE UNA SESIÓN ACTIVA
+// ==================================================
+
 const verificarSesion = async () => {
     try {
         const respuesta = await fetch(`${API_AUTH}/sesion`, {
@@ -31,8 +34,60 @@ const verificarSesion = async () => {
     }
 };
 
-// HU-003: Cerrar sesión
+// ==================================================
+// OBTENER RESUMEN DE ALERTAS ACTIVAS
+// ==================================================
+
+const obtenerResumenAlertas = async () => {
+
+    const mensajeAlertas = document.getElementById('mensajeAlertas');
+
+    try {
+
+        const respuesta = await fetch(
+            'http://localhost:3000/api/alertas/resumen',
+            {
+                method: 'GET',
+                credentials: 'include'
+            }
+        );
+
+        if (!respuesta.ok) {
+            throw new Error('No fue posible obtener el resumen de alertas');
+        }
+
+        const resultado = await respuesta.json();
+
+        document.getElementById('contadorAzul').textContent =
+            resultado.resumen.AZUL;
+
+        document.getElementById('contadorAmarillo').textContent =
+            resultado.resumen.AMARILLO;
+
+        document.getElementById('contadorNaranja').textContent =
+            resultado.resumen.NARANJA;
+
+        document.getElementById('contadorRojo').textContent =
+            resultado.resumen.ROJO;
+
+        mensajeAlertas.textContent =
+            'Resumen de alertas actualizado correctamente';
+
+    } catch (error) {
+
+        console.error('Error al obtener resumen de alertas:', error);
+
+        mensajeAlertas.textContent =
+            'No fue posible cargar el resumen de alertas';
+    }
+};
+
+// ==================================================
+// HU-003: CERRAR SESIÓN
+// ==================================================
+
 const cerrarSesion = async () => {
+
     btnCerrarSesion.disabled = true;
     mensajeError.textContent = '';
 
@@ -55,6 +110,11 @@ const cerrarSesion = async () => {
     }
 };
 
+// ==================================================
+// EVENTOS E INICIALIZACIÓN
+// ==================================================
+
 btnCerrarSesion.addEventListener('click', cerrarSesion);
 
 verificarSesion();
+obtenerResumenAlertas();

@@ -3,16 +3,15 @@ const pool = require('../config/database');
 const buscarPorCorreo = async (correo) => {
     const consulta = `
         SELECT
-            u.id_usuario,
-            u.nombres,
-            u.apellidos,
+            u.usuario_id AS id_usuario,
+            u.nombre AS nombres,
             u.correo,
             u.password_hash,
             u.activo,
             r.nombre AS rol
-        FROM usuario AS u 
-        INNER JOIN rol AS r
-            ON u.id_rol = r.id_rol
+        FROM usuarios AS u
+        INNER JOIN roles AS r
+            ON u.rol_id = r.rol_id
         WHERE u.correo = $1
     `;
 
@@ -46,17 +45,16 @@ const listarUsuarios = async () =>{
 const buscarPorId = async (id_usuario) => {
     const consulta = `
         SELECT
-            u.id_usuario,
-            u.nombres,
-            u.apellidos,
+            u.usuario_id AS id_usuario,
+            u.nombre AS nombres,
             u.correo,
-            u.id_rol,
+            u.rol_id AS id_rol,
             u.activo,
             r.nombre AS rol
-        FROM usuario AS u
-        INNER JOIN rol AS r
-            ON u.id_rol = r.id_rol
-        WHERE u.id_usuario = $1
+        FROM usuarios AS u
+        INNER JOIN roles AS r
+            ON u.rol_id = r.rol_id
+        WHERE u.usuario_id = $1
     `;
 
     const resultado = await pool.query(consulta, [id_usuario]);
