@@ -2,10 +2,12 @@ const express = require('express');
 
 const {
     iniciarSeguimiento,
+    cerrarCaso,
     registrarIntervencion,
     obtenerHistorialSeguimiento,
     obtenerResumenAlertas,
     obtenerEstudiantesConAlertas,
+    obtenerTodosLosEstudiantes,
     obtenerFichaEstudiante
 } = require('../controllers/alertaController');
 
@@ -15,6 +17,11 @@ const {
 
 const router = express.Router();
 
+// ==================================================
+// OBTENER LISTADO GENERAL DE ESTUDIANTES
+// ==================================================
+
+router.get('/estudiantes/todos', requiereAutenticacion, obtenerTodosLosEstudiantes);
 
 // ==================================================
 // OBTENER ESTUDIANTES CON ALERTAS ACTIVAS
@@ -54,6 +61,16 @@ router.patch(
     '/:alertaId/iniciar-seguimiento',
     requiereAutenticacion,
     iniciarSeguimiento
+);
+
+// ==================================================
+// CERRAR CASO DE UNA ALERTA
+// ==================================================
+
+router.patch(
+    '/:alertaId/cerrar-caso',
+    requiereAutenticacion,
+    cerrarCaso
 );
 
 // ==================================================

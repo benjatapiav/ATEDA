@@ -36,29 +36,43 @@
         
             <h2>Resumen de alertas activas</h2>
         
+
             <div class="contenedor-alertas">
             
-                <div class="tarjeta-alerta alerta-azul">
+                <a href="./estudiantes.html?alerta=AZUL"
+                   class="tarjeta-alerta alerta-azul">
+            
                     <h3>Azul</h3>
                     <div id="contadorAzul">0</div>
-                </div>
             
-                <div class="tarjeta-alerta alerta-amarilla">
+                </a>
+            
+                <a href="./estudiantes.html?alerta=AMARILLO"
+                   class="tarjeta-alerta alerta-amarilla">
+            
                     <h3>Amarillo</h3>
                     <div id="contadorAmarillo">0</div>
-                </div>
             
-                <div class="tarjeta-alerta alerta-naranja">
+                </a>
+            
+                <a href="./estudiantes.html?alerta=NARANJA"
+                   class="tarjeta-alerta alerta-naranja">
+            
                     <h3>Naranja</h3>
                     <div id="contadorNaranja">0</div>
-                </div>
             
-                <div class="tarjeta-alerta alerta-roja">
+                </a>
+            
+                <a href="./estudiantes.html?alerta=ROJO"
+                   class="tarjeta-alerta alerta-roja">
+            
                     <h3>Rojo</h3>
                     <div id="contadorRojo">0</div>
-                </div>
+            
+                </a>
             
             </div>
+
         
             <p id="mensajeAlertas" role="status">
                 Cargando resumen de alertas...
@@ -69,10 +83,20 @@
         <section>
             <h2>Opciones del sistema</h2>
 
-            <nav>
-                <a href="./usuarios.html">
-                    Gestión de usuarios
-                </a>
+            <nav class="navegacion-sistema">
+            
+                <div>
+                    <a href="./estudiantes.html">
+                        Listado general de estudiantes
+                    </a>
+                </div>
+            
+                <div>
+                    <a href="./usuarios.html">
+                        Gestión de usuarios
+                    </a>
+                </div>
+            
             </nav>
 
             <p class="descripcion">

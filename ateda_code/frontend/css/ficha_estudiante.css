@@ -279,3 +279,29 @@ section:nth-of-type(2) strong {
 #mensajeIntervencion {
     margin: 0;
 }
+
+/* ==================================================
+   BOTÓN CERRAR CASO
+   ================================================== */
+
+#botonCerrarCaso {
+    padding: 12px 20px;
+    background-color: #475569;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#botonCerrarCaso:hover {
+    background-color: #334155;
+}
+
+#botonCerrarCaso[hidden] {
+    display: none;
+}
+
+#seccionCerrarCaso[hidden] {
+    display: none;
+}

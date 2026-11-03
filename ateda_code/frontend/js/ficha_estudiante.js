@@ -118,6 +118,24 @@ const mostrarFichaEstudiante = (estudiante) => {
         delete seccionRegistrarIntervencion.dataset.alertaId;
     }
 
+    
+// ==================================================
+// CONTROLAR VISIBILIDAD DEL BOTÓN CERRAR CASO
+// ==================================================
+
+const botonCerrarCaso =
+    document.getElementById('botonCerrarCaso');
+
+botonCerrarCaso.hidden =
+    estudiante.estado !== 'EN SEGUIMIENTO' || !estudiante.alerta_id;
+
+if (!botonCerrarCaso.hidden) {
+    botonCerrarCaso.dataset.alertaId = estudiante.alerta_id;
+} else {
+    delete botonCerrarCaso.dataset.alertaId;
+}
+
+
 };
 
 
@@ -365,6 +383,168 @@ const registrarIntervencion = async (evento) => {
 };
 
 
+ // ==================================================
+ // MOSTRAR FORMULARIO DE CIERRE DE CASO
+ // ==================================================
+
+const mostrarFormularioCierre = () => {
+
+    const seccionCerrarCaso =
+        document.getElementById('seccionCerrarCaso');
+
+    const botonCerrarCaso =
+        document.getElementById('botonCerrarCaso');
+
+    const mensajeCierre =
+        document.getElementById('mensajeCierre');
+
+    seccionCerrarCaso.hidden = false;
+
+    botonCerrarCaso.hidden = true;
+
+    mensajeCierre.textContent = '';
+
+};
+
+
+// ==================================================
+// CANCELAR CIERRE DE CASO
+// ==================================================
+
+const cancelarCierreCaso = () => {
+
+    const seccionCerrarCaso =
+        document.getElementById('seccionCerrarCaso');
+
+    const botonCerrarCaso =
+        document.getElementById('botonCerrarCaso');
+
+    const formulario =
+        document.getElementById('formularioCerrarCaso');
+
+    seccionCerrarCaso.hidden = true;
+
+    botonCerrarCaso.hidden = false;
+
+    formulario.reset();
+
+};
+
+
+
+// ==================================================
+// CONFIRMAR CIERRE DE CASO
+// ==================================================
+
+const confirmarCierreCaso = async (evento) => {
+
+    evento.preventDefault();
+
+    const formulario =
+        document.getElementById('formularioCerrarCaso');
+
+    const boton =
+        document.getElementById('botonConfirmarCierre');
+
+    const botonCerrarCaso =
+        document.getElementById('botonCerrarCaso');
+
+    const seccionCerrarCaso =
+        document.getElementById('seccionCerrarCaso');
+
+    const mensaje =
+        document.getElementById('mensajeCierre');
+
+    const alertaId = botonCerrarCaso.dataset.alertaId;
+
+    const motivoCierre =
+        document.getElementById('motivoCierre').value;
+
+    const observacionCierre =
+        document.getElementById('observacionCierre').value.trim();
+
+    // ==================================================
+    // VALIDAR DATOS
+    // ==================================================
+
+    if (!alertaId || !motivoCierre || !observacionCierre) {
+        mensaje.textContent = 'Debe completar todos los campos.';
+        return;
+    }
+
+    const confirmar = window.confirm(
+        '¿Está seguro de que desea cerrar este caso?'
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    boton.disabled = true;
+    mensaje.textContent = 'Cerrando caso...';
+
+    try {
+
+        // ==================================================
+        // ENVIAR SOLICITUD AL BACKEND
+        // ==================================================
+
+        const respuesta = await fetch(
+            `${API_ALERTAS}/${encodeURIComponent(alertaId)}/cerrar-caso`,
+            {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    motivoCierre,
+                    observacionCierre
+                })
+            }
+        );
+
+        if (respuesta.status === 401) {
+            window.location.replace('./login.html');
+            return;
+        }
+
+        const datos = await respuesta.json();
+
+        if (!respuesta.ok) {
+            throw new Error(datos.mensaje || 'Error al cerrar el caso');
+        }
+
+        // ==================================================
+        // ACTUALIZAR INTERFAZ
+        // ==================================================
+
+        formulario.reset();
+
+        seccionCerrarCaso.hidden = true;
+
+        document.getElementById('mensajeAccionAlerta')
+            .textContent = 'Caso cerrado correctamente.';
+
+        await obtenerFichaEstudiante();
+
+        await obtenerHistorialSeguimiento();
+
+    } catch (error) {
+
+        console.error('Error al cerrar caso:', error);
+
+        mensaje.textContent = error.message;
+
+    } finally {
+
+        boton.disabled = false;
+
+    }
+
+};
+
+
 // ==================================================
 // EVENTOS
 // ==================================================
@@ -376,6 +556,14 @@ document.getElementById('botonIniciarSeguimiento')
 document.getElementById('formularioIntervencion')
     .addEventListener('submit', registrarIntervencion);
 
+document.getElementById('botonCerrarCaso')
+    .addEventListener('click', mostrarFormularioCierre);
+
+document.getElementById('botonCancelarCierre')
+    .addEventListener('click', cancelarCierreCaso);
+
+document.getElementById('formularioCerrarCaso')
+    .addEventListener('submit', confirmarCierreCaso);
 // ==================================================
 // INICIAR CARGA
 // ==================================================

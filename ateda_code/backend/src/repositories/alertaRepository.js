@@ -236,6 +236,44 @@ const iniciarSeguimiento = async (alertaId, usuarioId) => {
 
 
 // ==================================================
+// CERRAR CASO DE UNA ALERTA
+// ==================================================
+
+const cerrarCaso = async (alertaId, usuarioId, motivoCierre, observacionCierre) => {
+
+    const consulta = `
+        UPDATE alertas
+        SET
+            estado = 'CERRADO',
+            motivo_cierre = $3,
+            observacion_cierre = $4,
+            fecha_cierre = CURRENT_TIMESTAMP,
+            usuario_responsable_id = $2
+        WHERE alerta_id = $1
+          AND estado = 'EN SEGUIMIENTO'
+        RETURNING
+            alerta_id,
+            estudiante_id,
+            nivel,
+            estado,
+            motivo_cierre,
+            observacion_cierre,
+            fecha_cierre,
+            usuario_responsable_id
+    `;
+
+    const resultado = await pool.query(consulta, [
+        alertaId,
+        usuarioId,
+        motivoCierre,
+        observacionCierre
+    ]);
+
+    return resultado.rows[0] || null;
+};
+
+
+// ==================================================
 // REGISTRAR INTERVENCIÓN DE SEGUIMIENTO
 // ==================================================
 
@@ -415,6 +453,61 @@ const obtenerEstudiantesConAlertas = async () => {
 };
 
 
+ // ==================================================
+ // OBTENER TODOS LOS ESTUDIANTES
+ // ==================================================
+
+const obtenerTodosLosEstudiantes = async () => {
+
+    const consulta = `
+        SELECT
+            e.estudiante_id,
+            e.nombres,
+            e.apellido_paterno,
+            e.apellido_materno,
+            m.curso,
+            m.seccion,
+            m.anio,
+            a.alerta_id,
+            a.nivel,
+            a.estado,
+            a.motivo
+
+        FROM estudiantes AS e
+
+        LEFT JOIN LATERAL (
+            SELECT
+                curso,
+                seccion,
+                anio
+            FROM matriculas
+            WHERE estudiante_id = e.estudiante_id
+            ORDER BY anio DESC, matricula_id DESC
+            LIMIT 1
+        ) AS m ON TRUE
+
+        LEFT JOIN alertas AS a
+            ON a.estudiante_id = e.estudiante_id
+            AND a.estado <> 'CERRADO'
+
+        ORDER BY
+            CASE a.nivel
+                WHEN 'ROJO' THEN 1
+                WHEN 'NARANJA' THEN 2
+                WHEN 'AMARILLO' THEN 3
+                WHEN 'AZUL' THEN 4
+                ELSE 5
+            END,
+            e.apellido_paterno,
+            e.apellido_materno,
+            e.nombres
+    `;
+
+    const resultado = await pool.query(consulta);
+
+    return resultado.rows;
+};
+
 
 // ==================================================
 // OBTENER FICHA DE UN ESTUDIANTE
@@ -474,9 +567,11 @@ module.exports = {
     obtenerObservacionesDocentes,
     registrarAlertaGeneral,
     iniciarSeguimiento,
+    cerrarCaso,
     registrarIntervencion,
     obtenerHistorialSeguimiento,
     obtenerResumenAlertas,
     obtenerEstudiantesConAlertas,
+    obtenerTodosLosEstudiantes,
     obtenerFichaEstudiante
 };

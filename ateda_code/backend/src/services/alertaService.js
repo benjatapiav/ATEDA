@@ -919,6 +919,80 @@ const iniciarSeguimiento = async (alertaId, usuarioId) => {
 
 
 // ==================================================
+// CERRAR CASO DE UNA ALERTA
+// ==================================================
+
+const cerrarCaso = async (
+    alertaId,
+    usuarioId,
+    motivoCierre,
+    observacionCierre
+) => {
+
+    // ==================================================
+    // VALIDAR IDENTIFICADORES
+    // ==================================================
+
+    if (
+        !Number.isSafeInteger(Number(alertaId)) ||
+        Number(alertaId) <= 0
+    ) {
+        throw new Error('El identificador de la alerta no es válido');
+    }
+
+    if (
+        !Number.isSafeInteger(Number(usuarioId)) ||
+        Number(usuarioId) <= 0
+    ) {
+        throw new Error('El identificador del usuario no es válido');
+    }
+
+    // ==================================================
+    // VALIDAR MOTIVO DEL CIERRE
+    // ==================================================
+
+    const motivosPermitidos = [
+        'ALTA_OBJETIVOS',
+        'INASISTENCIA_APOYOS',
+        'TRASLADO',
+        'OTRO'
+    ];
+
+    if (
+        typeof motivoCierre !== 'string' ||
+        !motivosPermitidos.includes(motivoCierre)
+    ) {
+        throw new Error('El motivo del cierre no es válido');
+    }
+
+    // ==================================================
+    // VALIDAR OBSERVACIÓN DEL CIERRE
+    // ==================================================
+
+    if (
+        typeof observacionCierre !== 'string' ||
+        observacionCierre.trim().length === 0
+    ) {
+        throw new Error('Debe ingresar una observación del cierre');
+    }
+
+    // ==================================================
+    // CERRAR CASO EN POSTGRESQL
+    // ==================================================
+
+    const alerta = await alertaRepository.cerrarCaso(
+        alertaId,
+        usuarioId,
+        motivoCierre,
+        observacionCierre.trim()
+    );
+
+    return alerta;
+
+};
+
+
+// ==================================================
 // REGISTRAR INTERVENCIÓN DE SEGUIMIENTO
 // ==================================================
 
@@ -1052,6 +1126,18 @@ const obtenerEstudiantesConAlertas = async () => {
 
 
  // ==================================================
+ // OBTENER TODOS LOS ESTUDIANTES
+ // ==================================================
+
+const obtenerTodosLosEstudiantes = async () => {
+
+    const estudiantes = await alertaRepository.obtenerTodosLosEstudiantes();
+
+    return estudiantes;
+};
+
+
+ // ==================================================
  // OBTENER FICHA INDIVIDUAL DE UN ESTUDIANTE
  // ==================================================
 
@@ -1079,9 +1165,11 @@ module.exports = {
     evaluarTodasLasAlertas,
     registrarAlertasGenerales,
     iniciarSeguimiento,
+    cerrarCaso,
     registrarIntervencion,
     obtenerHistorialSeguimiento,
     obtenerResumenAlertas,
     obtenerEstudiantesConAlertas,
+    obtenerTodosLosEstudiantes,
     obtenerFichaEstudiante
 };

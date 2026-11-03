@@ -85,12 +85,13 @@
                 <span id="motivoAlerta"></span>
             </div>
 
+
             <!-- ==========================================
                  ACCIONES DE LA ALERTA
                  ========================================== -->
 
             <div id="accionesAlerta">
-
+            
                 <button
                     id="botonIniciarSeguimiento"
                     type="button"
@@ -98,17 +99,110 @@
                 >
                     Iniciar seguimiento
                 </button>
-
+            
+                <button
+                    id="botonCerrarCaso"
+                    type="button"
+                    hidden
+                >
+                    Cerrar caso
+                </button>
+            
                 <p id="mensajeAccionAlerta" role="status"></p>
-
+            
             </div>
 
+
         </section>
+
+
+        <!-- ==========================================
+             FORMULARIO DE CIERRE DE CASO
+             ========================================== -->
+            
+        <section id="seccionCerrarCaso" hidden>
+        
+            <h2>Cerrar caso</h2>
+        
+            <form id="formularioCerrarCaso">
+            
+                <div class="campo-formulario">
+                
+                    <label for="motivoCierre">
+                        Motivo del cierre:
+                    </label>
+                
+                    <select id="motivoCierre" name="motivo" required>
+                    
+                        <option value="">
+                            Seleccione un motivo
+                        </option>
+                    
+                        <option value="ALTA_OBJETIVOS">
+                            Alta por cumplimiento de objetivos
+                        </option>
+                    
+                        <option value="INASISTENCIA_APOYOS">
+                            Salida por inasistencia a apoyos
+                        </option>
+                    
+                        <option value="TRASLADO">
+                            Traslado de establecimiento
+                        </option>
+                    
+                        <option value="OTRO">
+                            Otro motivo
+                        </option>
+                    
+                    </select>
+                
+                </div>
+            
+                <div class="campo-formulario">
+                
+                    <label for="observacionCierre">
+                        Observación del cierre:
+                    </label>
+                
+                    <textarea
+                        id="observacionCierre"
+                        name="observacion"
+                        rows="4"
+                        required
+                        placeholder="Describa brevemente el motivo del cierre"
+                    ></textarea>
+                
+                </div>
+            
+                <div class="acciones-cierre">
+                
+                    <button
+                        id="botonConfirmarCierre"
+                        type="submit"
+                    >
+                        Confirmar cierre
+                    </button>
+                
+                    <button
+                        id="botonCancelarCierre"
+                        type="button"
+                    >
+                        Cancelar
+                    </button>
+                
+                </div>
+            
+                <p id="mensajeCierre" role="status"></p>
+            
+            </form>
+        
+        </section>
+
         
         <!-- ==========================================
              REGISTRAR INTERVENCIÓN
              ========================================== -->
-            
+
         <section id="seccionRegistrarIntervencion" hidden>
         
             <h2>Registrar intervención de seguimiento</h2>

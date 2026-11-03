@@ -9,6 +9,14 @@ const mensajeEstudiantes = document.getElementById('mensajeEstudiantes');
 const cuerpoTablaEstudiantes = document.getElementById('cuerpoTablaEstudiantes');
 
 // ==================================================
+// OBTENER FILTRO DE ALERTA DESDE LA URL
+// ==================================================
+
+const parametrosURL = new URLSearchParams(window.location.search);
+
+const filtroAlerta = parametrosURL.get('alerta')?.toUpperCase();
+
+// ==================================================
 // OBTENER ESTUDIANTES DESDE LA API
 // ==================================================
 
@@ -17,7 +25,7 @@ const obtenerEstudiantes = async () => {
     try {
 
         const respuesta = await fetch(
-            `${API_ALERTAS}/estudiantes`,
+            `${API_ALERTAS}/estudiantes/todos`,
             {
                 method: 'GET',
                 credentials: 'include'
@@ -25,7 +33,8 @@ const obtenerEstudiantes = async () => {
         );
 
         if (respuesta.status === 401) {
-            window.location.replace('./login.html');
+            console.error('ERROR 401: La sesión no está autorizada');
+            mensajeEstudiantes.textContent = 'Error 401: Sesión no autorizada';
             return;
         }
 
@@ -34,11 +43,21 @@ const obtenerEstudiantes = async () => {
         }
 
         const resultado = await respuesta.json();
-
-        mostrarEstudiantes(resultado.estudiantes);
-
-        mensajeEstudiantes.textContent =
-            `Total de estudiantes con alertas: ${resultado.total}`;
+        let estudiantes = resultado.estudiantes;
+            
+        if (filtroAlerta) {
+        
+            estudiantes = estudiantes.filter(estudiante =>
+                estudiante.nivel === filtroAlerta
+            );
+        
+        }
+        
+        mostrarEstudiantes(estudiantes);
+        
+        mensajeEstudiantes.textContent = filtroAlerta
+            ? `Estudiantes con alerta ${filtroAlerta}: ${estudiantes.length}`
+            : `Total de estudiantes registrados: ${estudiantes.length}`;
 
     } catch (error) {
 
@@ -65,9 +84,9 @@ const mostrarEstudiantes = (estudiantes) => {
             estudiante.estudiante_id,
             `${estudiante.nombres} ${estudiante.apellido_paterno} ${estudiante.apellido_materno}`,
             `${estudiante.curso ?? 'Sin curso'} ${estudiante.seccion ?? ''}`,
-            estudiante.nivel,
-            estudiante.estado,
-            estudiante.motivo
+            estudiante.nivel ?? 'SIN ALERTA',
+            estudiante.estado ?? 'SIN ALERTA ACTIVA',
+            estudiante.motivo ?? 'Sin detecciones activas'
         ];
 
 datos.forEach((dato, indice) => {
@@ -93,7 +112,7 @@ datos.forEach((dato, indice) => {
     }
 
     // Columna Nivel (índice 3)
-    if (indice === 3) {
+    if (indice === 3 && estudiante.nivel) {
         celda.classList.add('nivel-alerta');
         celda.classList.add(`nivel-${estudiante.nivel.toLowerCase()}`);
     }

@@ -60,6 +60,70 @@ const iniciarSeguimiento = async (req, res) => {
 
 
 // ==================================================
+// CERRAR CASO DE UNA ALERTA
+// ==================================================
+
+const cerrarCaso = async (req, res) => {
+
+    try {
+
+        // ==================================================
+        // OBTENER DATOS
+        // ==================================================
+
+        const alertaId = req.params.alertaId;
+        const usuarioId = req.session.usuario.id_usuario;
+
+        const { motivoCierre, observacionCierre } = req.body || {};
+
+        // ==================================================
+        // CERRAR CASO
+        // ==================================================
+
+        const alerta = await alertaService.cerrarCaso(
+            alertaId,
+            usuarioId,
+            motivoCierre,
+            observacionCierre
+        );
+
+        if (!alerta) {
+            return res.status(409).json({
+                mensaje: 'No fue posible cerrar el caso. Verifique que la alerta esté en seguimiento'
+            });
+        }
+
+        // ==================================================
+        // RESPUESTA
+        // ==================================================
+
+        return res.status(200).json({
+            mensaje: 'Caso cerrado correctamente',
+            alerta
+        });
+
+    } catch (error) {
+
+        console.error('Error al cerrar caso:', error.message);
+
+        if (
+            error.message.includes('no es válido') ||
+            error.message.includes('Debe ingresar')
+        ) {
+            return res.status(400).json({
+                mensaje: error.message
+            });
+        }
+
+        return res.status(500).json({
+            mensaje: 'Error al cerrar el caso'
+        });
+    }
+
+};
+
+
+// ==================================================
 // REGISTRAR INTERVENCIÓN DE SEGUIMIENTO
 // ==================================================
 
@@ -235,6 +299,45 @@ const obtenerEstudiantesConAlertas = async (req, res) => {
 
 
  // ==================================================
+ // OBTENER TODOS LOS ESTUDIANTES
+ // ==================================================
+
+const obtenerTodosLosEstudiantes = async (req, res) => {
+
+    try {
+
+        // ==================================================
+        // CONSULTAR ESTUDIANTES
+        // ==================================================
+
+        const estudiantes = await alertaService.obtenerTodosLosEstudiantes();
+
+        // ==================================================
+        // RESPUESTA
+        // ==================================================
+
+        return res.status(200).json({
+            mensaje: 'Listado general de estudiantes obtenido correctamente',
+            total: estudiantes.length,
+            estudiantes: estudiantes
+        });
+
+    } catch (error) {
+
+        console.error(
+            'Error al obtener todos los estudiantes:',
+            error.message
+        );
+
+        return res.status(500).json({
+            mensaje: 'Error al obtener el listado general de estudiantes'
+        });
+    }
+};
+
+
+
+ // ==================================================
  // OBTENER FICHA INDIVIDUAL DE UN ESTUDIANTE
  // ==================================================
 
@@ -272,11 +375,14 @@ const obtenerEstudiantesConAlertas = async (req, res) => {
 // EXPORTAR FUNCIONES
 // ==================================================
 
+
 module.exports = {
     iniciarSeguimiento,
+    cerrarCaso,
     registrarIntervencion,
     obtenerHistorialSeguimiento,
     obtenerResumenAlertas,
     obtenerEstudiantesConAlertas,
+    obtenerTodosLosEstudiantes,
     obtenerFichaEstudiante
 };
